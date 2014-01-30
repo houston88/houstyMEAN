@@ -8,4 +8,11 @@ angular.module('houstyApp')
   //$http.get('/api/awesomeThings').success(function(awesomeThings) {
   //  $scope.awesomeThings = awesomeThings;
   //});
+  
+  // Common utility methods
+  $scope.scrollTop = function() {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+    return false;
+  };
+  
 });
