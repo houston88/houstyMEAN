@@ -16,4 +16,12 @@ angular.module('houstyApp')
     $scope.isActive = function(route) {
       return $location.path().indexOf(route) === 0;
     };
+    
+    // Close collapsed menu on click
+    $scope.collapseMenu = function() {
+      if (angular.element('.navbar-collapse').hasClass('in')) {
+        angular.element('.navbar-collapse').collapse('hide');
+      }
+    };
+    
   });

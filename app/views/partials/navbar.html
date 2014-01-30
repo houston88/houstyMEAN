@@ -14,7 +14,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                       <li ng-repeat="item in menu" ng-class="{active: isActive(item.path)}">
-                          <a ng-href="{{item.link}}">{{item.title}}</a>
+                          <a ng-href="{{item.link}}" ng-click="collapseMenu()">{{item.title}}</a>
                       </li>
                     </ul>
                 </div>

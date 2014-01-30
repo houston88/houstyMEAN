@@ -11,7 +11,7 @@ angular.module('houstyApp')
   
   // Common utility methods
   $scope.scrollTop = function() {
-    $("html, body").animate({ scrollTop: 0 }, "slow");
+    angular.element('html, body').animate({ scrollTop: 0 }, 'slow');
     return false;
   };
   
