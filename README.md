@@ -39,7 +39,10 @@ To start in production/minified mode: `grunt serve:dist`
 
 ### To run as a daemon
 
-Install forever: ```npm install forever```
+Install forever:
+```
+npm install forever
+```
 
 Start as daemon on port 80 (as root), have to build first with grunt: `./start.sh`
 
