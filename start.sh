@@ -4,5 +4,5 @@
 
 export PORT="80"
 export NODE_ENV="production"
-forever start -l ~/foreverLog.txt -o ~/serverLog.txt -e ~/errorLog.txt dist/server.js
+forever start -a -l ~/foreverLog.txt -o ~/serverLog.txt -e ~/errorLog.txt dist/server.js
 
