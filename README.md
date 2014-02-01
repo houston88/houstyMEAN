@@ -27,6 +27,18 @@ Download the bower libraries:
 bower install
 ```
 
-To run, refer to the AngularJs Full Stack generator docs:
+### For more details refer to the AngularJs Full Stack generator docs:
 
 > https://github.com/DaftMonk/generator-angular-fullstack/
+
+## To Run
+
+To start in dev mode: `grunt serve`
+
+To start in production/minified mode: `grunt serve:dist`
+
+### To run as a daemon
+
+Install forever: `npm install forever`
+Start as daemon on port 80 (as root), have to build first with grunt: `./start.sh`
+Stop daemon: `./stop.sh`
