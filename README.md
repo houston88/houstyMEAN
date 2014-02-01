@@ -1,6 +1,6 @@
-# Bootstrap AngularJS Fullstack Node Simple Start
+# MEAN Sorta Simple Start
 
-## Used the Yeoman AngularJS + Express Full Stack Generator that provides:
+## Started with Yeoman AngularJS+Express Full Stack Generator that provides:
 
  * Express server integrated with grunt tasks
  * Livereload of client and server files
@@ -9,13 +9,13 @@
  * Optional MongoDB integration
  * Optional Passport integration for adding user accounts
 
-## After that I modified to create a base project for:
+## Then modified to create a base project for:
 
  * MEAN stack starter project, customized for family launch page.
  * Based on the bootstrap 3.0 carousel example.
  * Commented out sample api that connects to mongo.
 
-After cloning, assuming you have the tools downloaded as outlined on http://mean.io, run the following commands.
+After cloning, assuming you have the tools downloaded as outlined on http://mean.io, run the following.
 
 Download the npm packages:
 ```
@@ -39,7 +39,7 @@ To start in production/minified mode: `grunt serve:dist`
 
 ### To run as a daemon
 
-Install forever: `npm install forever`
+Install forever: ```npm install forever```
 
 Start as daemon on port 80 (as root), have to build first with grunt: `./start.sh`
 
