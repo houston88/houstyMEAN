@@ -31,6 +31,11 @@
     <div ng-controller="MainCtrl">
         <div ng-include="'partials/navbar'"></div>
         <ng-view></ng-view>
+        <div class="container">
+            <footer>
+                <p class="text-center">housty.io<br><a href="" ng-click="scrollTop()">Back to top</a></p>
+            </footer>
+        </div>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -56,6 +61,9 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/topojson/topojson.js"></script>
+    <script src="bower_components/datamaps/dist/datamaps.all.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
