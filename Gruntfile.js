@@ -175,12 +175,11 @@ module.exports = function (grunt) {
     },
 
     // Automatically inject Bower components into the app
-    // We want to ignore the bootstrap css since we are using less now
     'bower-install': {
       app: {
         html: '<%= yeoman.app %>/views/index.html',
         ignorePath: '<%= yeoman.app %>/',
-        exlude: ['bower_components/bootstrap/dist/css/bootstrap.css']
+        exlude: []
       }
     },
 
