@@ -58,6 +58,10 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
+      less: {
+        files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+        tasks: ['less']
+      },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
@@ -153,12 +157,30 @@ module.exports = function (grunt) {
         }]
       }
     },
+    
+    // Now we want to use less to control all styles
+    less: {
+      dist: {
+        files: {
+          '<%= yeoman.app %>/styles/main.css': ['<%= yeoman.app %>/styles/main.less']
+        },
+        options: {
+          sourceMap: true,
+          sourceMapFilename: '<%= yeoman.app %>/styles/main.css.map',
+          sourceMapBasepath: '<%= yeoman.app %>/',
+          sourceMapRootpath: '/',
+          report: true
+        }
+      }
+    },
 
     // Automatically inject Bower components into the app
+    // We want to ignore the bootstrap css since we are using less now
     'bower-install': {
       app: {
         html: '<%= yeoman.app %>/views/index.html',
-        ignorePath: '<%= yeoman.app %>/'
+        ignorePath: '<%= yeoman.app %>/',
+        exlude: ['bower_components/bootstrap/dist/css/bootstrap.css']
       }
     },
 
@@ -364,6 +386,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'bower-install',
+      'less',
       'concurrent:server',
       'autoprefixer',
       'express:dev',
@@ -379,6 +402,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
+    'less',
     'concurrent:test',
     'autoprefixer',
     'karma'
@@ -388,6 +412,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'bower-install',
     'useminPrepare',
+    'less',
     'concurrent:dist',
     'autoprefixer',
     'concat',
