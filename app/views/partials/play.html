@@ -1,7 +1,17 @@
 <div class="container marketing">
   <div class="jumbotron">
     <h2>Happiest States</h2>
-    <p class="lead">Based on 1% Twitter stream from Feb 1, 2014 8:00 pm to 8:10 pm</p>
+    <p class="lead">Based on 1% Twitter stream.</p>
+    
+    <div class="btn-group">
+      <button ng-repeat="happiestState in happiestStates"
+              ng-class="{active:isActive(happiestState._id)}"
+              ng-click="updateMap(happiestState._id)"
+              type="button" class="btn btn-default">
+        {{happiestState.parseDate | date:'medium'}}
+      </button>
+    </div>
+    
     <div class="map" id="usMap"></div>
     <small>
       Positive scores are positive vibes. Negative scopes are... well, sad vibes.<br>
