@@ -1,17 +1,39 @@
 <div class="container marketing">
   <div class="jumbotron">
     <h2>Happiest States</h2>
-    <p class="lead">Based on 1% Twitter stream.</p>
+    <p class="lead">Based on 10 minutes of 1% Twitter stream from {{selectedDate | date:'medium'}}</p>
     
+    <!--
     <div class="btn-group">
       <button ng-repeat="happiestState in happiestStates"
               ng-class="{active:isActive(happiestState._id)}"
-              ng-click="updateMap(happiestState._id)"
+              ng-click="updateMap(happiestState)"
               type="button" class="btn btn-default">
         {{happiestState.parseDate | date:'medium'}}
       </button>
     </div>
+    -->
     
+    <!-- lets try slider out, works okay I guess --> 
+    <div class="row">
+      <div class="col-sm-4">
+        <slider ng-model="slider.index" 
+                floor="0"
+                ceiling="{{slider.count}}" 
+                step="1" 
+                precision="1">
+        </slider>
+      </div>
+    </div>
+    
+    <!-- lets try a regular slider, range issues
+    <div class="row">
+      <div class="col-sm-4">
+        <input type="range" name="dataPoint" ng-model="slider.index" min="0" max="{{slider.count}}">
+      </div>
+    </div>
+    -->  
+      
     <div class="map" id="usMap"></div>
     <small>
       Positive scores are positive vibes. Negative scopes are... well, sad vibes.<br>

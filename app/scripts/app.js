@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('houstyApp', ['ngRoute'])
+angular.module('houstyApp', ['ngRoute', 'uiSlider'])
 
 .config(function($routeProvider) {
   $routeProvider
