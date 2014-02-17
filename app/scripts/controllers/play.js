@@ -16,8 +16,7 @@ angular.module('houstyApp')
     // Get full data
     $http.get('/api/happiestStates/'+id).success(function(data) {
       if (dm) {
-        // The colors update, however the popup data is off
-        // Disable popup and just show data in table to right
+        // Update
         dm.updateChoropleth(data[0]);
       } else {
         // first time
