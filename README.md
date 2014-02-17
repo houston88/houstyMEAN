@@ -13,7 +13,7 @@
 
  * MEAN stack starter project, customized for family launch page.
  * Based on the bootstrap 3.0 carousel example.
- * Commented out sample api that connects to mongo.
+ * Added to mongoose api that connects to mongo for some example data viz.
 
 After cloning, assuming you have the tools downloaded as outlined on http://mean.io, run the following.
 
@@ -32,6 +32,8 @@ bower install
 > https://github.com/DaftMonk/generator-angular-fullstack/
 
 ## To Run
+
+Start monogo: `mongod &`
 
 To start in dev mode: `grunt serve`
 
