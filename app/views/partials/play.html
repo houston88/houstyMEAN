@@ -14,23 +14,10 @@
     </div>
     -->
     
-    <!-- lets try slider out, works okay I guess. Doesn't work minified! 
+    <!-- jquery slider, need to make a directive -->
     <div class="row">
       <div class="col-sm-4">
-        <slider ng-model="slider.index" 
-                floor="0"
-                ceiling="{{slider.count}}" 
-                step="1" 
-                precision="1">
-        </slider>
-      </div>
-    </div>
-    -->
-    
-    <!-- lets try a regular slider, range issues -->
-    <div class="row">
-      <div class="col-sm-4">
-        <input type="range" name="dataPoint" ng-model="slider.index" min="0" max="{{slider.count}}">
+        <div id="dateslider"></div>
       </div>
     </div>
       

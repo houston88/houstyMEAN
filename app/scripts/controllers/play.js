@@ -12,7 +12,7 @@ angular.module('houstyApp')
     return id === $scope.selectedId;
   };
   
-  // Watch for value change, update map
+  // Watch for value change, update map, not currently used
   $scope.$watch('slider.index', function(newValue, oldValue) {
     // Ug, have to parse
     var newIntVal = parseInt(newValue,10);
@@ -44,7 +44,19 @@ angular.module('houstyApp')
       $scope.happiestStates = data;
       $scope.slider.index = 0;
       $scope.slider.count = data.length-1;
-      $scope.updateMap(data[0]);
+      
+      // Init jquery slider. TODO: Make directive
+      angular.element('#dateslider').noUiSlider({
+        range: [0, data.length-1],
+        start: data.length-1,
+        step: 1,
+        handles: 1,
+        slide: function() {
+          $scope.updateMap(data[parseInt(this.val(),10)]);
+        }
+      });
+      
+      $scope.updateMap(data[data.length-1]);
     }
   });
 
