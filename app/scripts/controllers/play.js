@@ -21,13 +21,26 @@ angular.module('houstyApp')
       $scope.updateMap($scope.happiestStates[newIntVal]);
     }
   });
-  
+
+  // transform data into array for table
+  var states = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
+  function topTenStates(data) {
+    var statesTable = [];
+    states.forEach(function(state) {
+      if (data[state]) {
+        statesTable.push({'state': state, rank: data[state].rank, score:data[state].score});
+      }
+    });
+    $scope.statesTable = statesTable;
+  }
+
   $scope.updateMap = function(happiestState) {
     // update selected
     $scope.selectedId = happiestState._id;
     $scope.selectedDate = happiestState.parseDate;
     // Get full data
     $http.get('/api/happiestStates/'+happiestState._id).success(function(data) {
+      topTenStates(data[0]);
       if (dm) {
         // Update
         dm.updateChoropleth(data[0]);
