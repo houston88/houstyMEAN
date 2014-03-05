@@ -20,6 +20,8 @@
   "smarttabs": true,
   "globals": {
     "angular": false,
-    "Datamap": false
+    "Datamap": false,
+    "d3": false,
+    "$": false
   }
 }

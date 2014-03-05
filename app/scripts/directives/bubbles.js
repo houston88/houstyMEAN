@@ -1,11 +1,9 @@
-var Bubbles, root, texts;
+'use strict';
 
-root = typeof exports !== "undefined" && exports !== null ? exports : this;
-
-Bubbles = function() {
+var Bubbles = function(widthAttr) {
   var chart, clear, click, collide, collisionPadding, connectEvents, data, force, gravity, hashchange, height, idValue, jitter, label, margin, maxRadius, minCollisionRadius, mouseout, mouseover, node, rScale, rValue, textValue, tick, transformData, update, updateActive, updateLabels, updateNodes, width;
-  width = 980;
-  height = 510;
+  width = widthAttr || 600;
+  height = 400;
   data = [];
   node = null;
   label = null;
@@ -41,16 +39,16 @@ Bubbles = function() {
   tick = function(e) {
     var dampenedAlpha;
     dampenedAlpha = e.alpha * 0.1;
-    node.each(gravity(dampenedAlpha)).each(collide(jitter)).attr("transform", function(d) {
-      return "translate(" + d.x + "," + d.y + ")";
+    node.each(gravity(dampenedAlpha)).each(collide(jitter)).attr('transform', function(d) {
+      return 'translate(' + d.x + ',' + d.y + ')';
     });
-    return label.style("left", function(d) {
-      return ((margin.left + d.x) - d.dx / 2) + "px";
-    }).style("top", function(d) {
-        return ((margin.top + d.y) - d.dy / 2) + "px";
+    return label.style('left', function(d) {
+      return ((margin.left + d.x) - d.dx / 2) + 'px';
+    }).style('top', function(d) {
+        return ((margin.top + d.y) - d.dy / 2) + 'px';
       });
   };
-  force = d3.layout.force().gravity(0).charge(0).size([width, height]).on("tick", tick);
+  force = d3.layout.force().gravity(0).charge(0).size([width, height]).on('tick', tick);
   chart = function(selection) {
     return selection.each(function(rawData) {
       var maxDomainValue, svg, svgEnter;
@@ -59,67 +57,71 @@ Bubbles = function() {
         return rValue(d);
       });
       rScale.domain([0, maxDomainValue]);
-      svg = d3.select(this).selectAll("svg").data([data]);
-      svgEnter = svg.enter().append("svg");
-      svg.attr("width", width + margin.left + margin.right);
-      svg.attr("height", height + margin.top + margin.bottom);
-      node = svgEnter.append("g").attr("id", "bubble-nodes").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-      node.append("rect").attr("id", "bubble-background").attr("width", width).attr("height", height).on("click", clear);
-      label = d3.select(this).selectAll("#bubble-labels").data([data]).enter().append("div").attr("id", "bubble-labels");
+      svg = d3.select(this).selectAll('svg').data([data]);
+      svgEnter = svg.enter().append('svg');
+      svg.attr('width', width + margin.left + margin.right);
+      svg.attr('height', height + margin.top + margin.bottom);
+      node = svgEnter.append('g').attr('id', 'bubble-nodes').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+      node.append('rect').attr('id', 'bubble-background').attr('width', width).attr('height', height);
+      //.on('click', clear);
+      label = d3.select(this).selectAll('#bubble-labels').data([data]).enter().append('div').attr('id', 'bubble-labels');
       update();
       hashchange();
-      return d3.select(window).on("hashchange", hashchange);
+      //return d3.select(window).on('hashchange', hashchange);
     });
   };
   update = function() {
     data.forEach(function(d, i) {
-      return d.forceR = Math.max(minCollisionRadius, rScale(rValue(d)));
+      d.forceR = Math.max(minCollisionRadius, rScale(rValue(d)));
+      return d.forceR;
     });
     force.nodes(data).start();
     updateNodes();
     return updateLabels();
   };
   updateNodes = function() {
-    node = node.selectAll(".bubble-node").data(data, function(d) {
+    node = node.selectAll('.bubble-node').data(data, function(d) {
       return idValue(d);
     });
     node.exit().remove();
-    return node.enter().append("a").attr("class", "bubble-node").attr("xlink:href", function(d) {
-      return "#" + (encodeURIComponent(idValue(d)));
-    }).call(force.drag).call(connectEvents).append("circle").attr("r", function(d) {
+    return node.enter().append('a').attr('class', 'bubble-node').attr('xlink:href', function(d) {
+      return '#' + (encodeURIComponent(idValue(d)));
+    }).call(force.drag).call(connectEvents).append('circle').attr('r', function(d) {
         return rScale(rValue(d));
       });
   };
   updateLabels = function() {
     var labelEnter;
-    label = label.selectAll(".bubble-label").data(data, function(d) {
+    label = label.selectAll('.bubble-label').data(data, function(d) {
       return idValue(d);
     });
     label.exit().remove();
-    labelEnter = label.enter().append("a").attr("class", "bubble-label").attr("href", function(d) {
-      return "#" + (encodeURIComponent(idValue(d)));
+    labelEnter = label.enter().append('a').attr('class', 'bubble-label').attr('href', function(d) {
+      return '#' + (encodeURIComponent(idValue(d)));
     }).call(force.drag).call(connectEvents);
-    labelEnter.append("div").attr("class", "bubble-label-name").text(function(d) {
+    labelEnter.append('div').attr('class', 'bubble-label-name').text(function(d) {
       return textValue(d);
     });
-    labelEnter.append("div").attr("class", "bubble-label-value").text(function(d) {
+    labelEnter.append('div').attr('class', 'bubble-label-value').text(function(d) {
       return rValue(d);
     });
-    label.style("font-size", function(d) {
-      return Math.max(8, rScale(rValue(d) / 2)) + "px";
-    }).style("width", function(d) {
-        return 2.5 * rScale(rValue(d)) + "px";
+    label.style('font-size', function(d) {
+      return Math.max(8, rScale(rValue(d) / 8)) + 'px';
+    }).style('width', function(d) {
+        return 2.5 * rScale(rValue(d)) + 'px';
       });
-    label.append("span").text(function(d) {
+    label.append('span').text(function(d) {
       return textValue(d);
     }).each(function(d) {
-        return d.dx = Math.max(2.5 * rScale(rValue(d)), this.getBoundingClientRect().width);
+        d.dx = Math.max(2.5 * rScale(rValue(d)), this.getBoundingClientRect().width);
+        return d.dx;
       }).remove();
-    label.style("width", function(d) {
-      return d.dx + "px";
+    label.style('width', function(d) {
+      return d.dx + 'px';
     });
     return label.each(function(d) {
-      return d.dy = this.getBoundingClientRect().height;
+      d.dy = this.getBoundingClientRect().height;
+      return d.dy;
     });
   };
   gravity = function(alpha) {
@@ -156,15 +158,15 @@ Bubbles = function() {
     };
   };
   connectEvents = function(d) {
-    d.on("click", click);
-    d.on("mouseover", mouseover);
-    return d.on("mouseout", mouseout);
+    d.on('click', click);
+    d.on('mouseover', mouseover);
+    return d.on('mouseout', mouseout);
   };
   clear = function() {
-    return location.replace("#");
+    return location.replace('#');
   };
   click = function(d) {
-    location.replace("#" + encodeURIComponent(idValue(d)));
+    //location.replace('#' + encodeURIComponent(idValue(d)));
     return d3.event.preventDefault();
   };
   hashchange = function() {
@@ -173,22 +175,22 @@ Bubbles = function() {
     return updateActive(id);
   };
   updateActive = function(id) {
-    node.classed("bubble-selected", function(d) {
+    node.classed('bubble-selected', function(d) {
       return id === idValue(d);
     });
     if (id.length > 0) {
-      return d3.select("#status").html("<h3>The word <span class=\"active\">" + id + "</span> is now active</h3>");
+      return d3.select('#status').html('<h3>The word <span class=\'active\'>' + id + '</span> is now active</h3>');
     } else {
-      return d3.select("#status").html("<h3>No word is active</h3>");
+      return d3.select('#status').html('<h3>No word is active</h3>');
     }
   };
   mouseover = function(d) {
-    return node.classed("bubble-hover", function(p) {
+    return node.classed('bubble-hover', function(p) {
       return p === d;
     });
   };
   mouseout = function(d) {
-    return node.classed("bubble-hover", false);
+    return node.classed('bubble-hover', false);
   };
   chart.jitter = function(_) {
     if (!arguments.length) {
@@ -222,55 +224,31 @@ Bubbles = function() {
   return chart;
 };
 
-root.plotData = function(selector, data, plot) {
-  return d3.select(selector).datum(data).call(plot);
-};
-
-texts = [
+// What data should look like
+var testData = [
   {
-    key: "sherlock",
-    file: "top_sherlock.csv",
-    name: "The Adventures of Sherlock Holmes"
-  }, {
-    key: "aesop",
-    file: "top_aesop.csv",
-    name: "Aesop's Fables"
-  }, {
-    key: "alice",
-    file: "alice.csv",
-    name: "Alice's Adventures in Wonderland"
-  }, {
-    key: "gulliver",
-    file: "top_gulliver.csv",
-    name: "Gulliver's Travels"
-  }
+    'name':'majesty',
+    'count':91
+  },
+  {
+    'name':'country',
+    'count':87
+  },
 ];
 
-$(function() {
-  var display, key, plot, text;
-
-  plot = Bubbles();
-  display = function(data) {
-    return plotData("#vis", data, plot);
-  };
-
-  key = decodeURIComponent(location.search).replace("?", "");
-  text = texts.filter(function(t) {
-    return t.key === key;
-  })[0];
-  if (!text) {
-    text = texts[0];
+// TODO: Make directive
+var bubbleChart;
+function plotBubbles(data) {
+  if (bubbleChart) {
+    // remove svg
+    d3.select('#vis').select('svg').remove();
+    // remove bubbles
+    d3.select('#vis').select('#bubble-labels').remove();
+    // can we just re-create here? Yes! Cool!
+    d3.select('#vis').datum(data).call(bubbleChart);
+  } else {
+    bubbleChart = new Bubbles($('#vis').width());
+    d3.select('#vis').datum(data).call(bubbleChart);
   }
-  $("#text-select").val(key);
-  d3.select("#jitter").on("input", function() {
-    return plot.jitter(parseFloat(this.output.value));
-  });
-  d3.select("#text-select").on("change", function(e) {
-    key = $(this).val();
-    location.replace("#");
-    return location.search = encodeURIComponent(key);
-  });
-  d3.select("#book-title").html(text.name);
-  return d3.csv("data/" + text.file, display);
 
-});
+}

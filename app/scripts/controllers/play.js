@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('houstyApp')
-.controller('PlayCtrl', function ($scope, $http) {
+.controller('PlayCtrl', function ($scope, $http, $window) {
   var dm;
   
   $scope.hello = 'Hello Play';
@@ -48,6 +48,18 @@ angular.module('houstyApp')
         // first time
         loadMap(data[0]);
       }
+
+      // Lets try out bubbles
+      // Transform hashtags to name in object
+      var bubbleData = [];
+      data[0].hashtags.forEach(function(tag) {
+        bubbleData.push({name:tag.hashtag,count:tag.count});
+      });
+      // store in scope variable
+      $scope.hashtags = bubbleData;
+      // TODO: Change to directive
+      $window.plotBubbles(bubbleData);
+
     });
   };
 
