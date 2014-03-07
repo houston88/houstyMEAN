@@ -13,11 +13,10 @@
       </button>
     </div>
     -->
-    
-    <!-- jquery slider, need to make a directive -->
+
     <div class="row">
       <div class="col-sm-4">
-        <div id="dateslider"></div>
+        <simple-slider ng-if="sliderSettings" ng-model="sliderSettings.value" start="{{sliderSettings.start}}" end="{{sliderSettings.end}}"></simple-slider>
       </div>
     </div>
 
@@ -66,7 +65,7 @@
           </thead>
           <tbody>
           <tr ng-repeat="tag in hashtags | orderBy:'-count' | limitTo:10">
-            <td>{{tag.name}}</td>
+            <td class="hashtags">{{tag.name}}</td>
             <td>{{tag.count}}</td>
           </tr>
           </tbody>

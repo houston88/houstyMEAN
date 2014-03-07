@@ -7,20 +7,10 @@ angular.module('houstyApp')
   $scope.hello = 'Hello Play';
   $scope.slider = {index:0,count:0};
   
-  // Used by buttons
+  // Used by buttons, not currently used
   $scope.isActive = function(id) {
     return id === $scope.selectedId;
   };
-  
-  // Watch for value change, update map, not currently used
-  $scope.$watch('slider.index', function(newValue, oldValue) {
-    // Ug, have to parse
-    var newIntVal = parseInt(newValue,10);
-    var oldIntVal = parseInt(oldValue,10);
-    if (oldIntVal !== newIntVal) {
-      $scope.updateMap($scope.happiestStates[newIntVal]);
-    }
-  });
 
   // transform data into array for table
   var states = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
@@ -63,23 +53,26 @@ angular.module('houstyApp')
     });
   };
 
+  // watch for slider value changes
+  $scope.$watch('sliderSettings.value', function(newValue, oldValue) {
+    if ((newValue !== oldValue) && oldValue) {
+      $scope.updateMap($scope.happiestStates[parseInt(newValue,10)]);
+    }
+  });
+
   // Initial load data
   $http.get('/api/happiestStates').success(function(data) {
     if (data.length>0) {
       $scope.happiestStates = data;
       $scope.slider.index = 0;
       $scope.slider.count = data.length-1;
-      
-      // Init jquery slider. TODO: Make directive
-      angular.element('#dateslider').noUiSlider({
-        range: [0, data.length-1],
-        start: data.length-1,
-        step: 1,
-        handles: 1,
-        slide: function() {
-          $scope.updateMap(data[parseInt(this.val(),10)]);
-        }
-      });
+
+      // init settings for slider directive, we now have a range
+      $scope.sliderSettings = {
+        start: 0,
+        end: data.length-1,
+        value: data.length-1
+      };
       
       $scope.updateMap(data[data.length-1]);
     }
