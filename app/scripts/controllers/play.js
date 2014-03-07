@@ -52,6 +52,8 @@ angular.module('houstyApp')
         $timeout(function() {
           $window.plotBubbles(bubbleData);
         });
+      } else {
+        $scope.hashtags = false;
       }
 
     });
