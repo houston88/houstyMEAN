@@ -32,10 +32,11 @@ angular.module('houstyApp')
               step: 1,
               handles: 1,
               slide: function() {
+                var that = this;
                 // need some way to notify of change
-                ngModel.$setViewValue(this.val());
-                // we are outside angular, do an apply
-                $scope.$apply();
+                $scope.$apply(function() {
+                  ngModel.$setViewValue(that.val());
+                });
               }
             });
           });

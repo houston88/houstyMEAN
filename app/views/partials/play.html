@@ -51,7 +51,7 @@
       Based on <a href="http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010" target="_blank">AFINN-111</a>
     </small>
 
-    <div ng-if="hashtags">
+    <div ng-show="hashtags">
       <h2>Top 10 Hashtags</h2>
       <p class="lead">Based on 10 minutes of 1% Twitter stream from {{selectedDate | date:'medium'}} GMT</p>
       <div class="row">
