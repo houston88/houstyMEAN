@@ -100,6 +100,7 @@ angular.module('houstyApp')
       data: mapData,
       geographyConfig: {
         highlightBorderColor: '#bada55',
+        highlightFillColor: '#FC8D59',
         popupTemplate: function(geography, data) {
           if (!data) {
             data = {rank:'NA',score:'NA'};
