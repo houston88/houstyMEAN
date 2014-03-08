@@ -39,10 +39,10 @@ To start in dev mode: `grunt serve`
 
 To start in production/minified mode: `grunt serve:dist`
 
-### To run as a daemon
+### To run as a daemon using node package forever
 
 Install forever: `npm install forever`
 
-Start as daemon on port 80 (as root), have to build first with grunt: `./start.sh`
+To start as daemon on port 80 (as root), build with grunt, then run: `./start.sh`
 
 Stop daemon: `./stop.sh`
