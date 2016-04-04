@@ -48,6 +48,7 @@ To start as daemon on port 80 (as root), build with grunt, then run: `./start.sh
 Stop daemon: `./stop.sh`
 
 Trying out forever-service, so that the app starts after system restart, pretty cool!
+Now working on getting shippable to build and deploy automatically.
 
 'npm install -g forever-service'
 'forever-service install houstyIO -e "PORT=80 NODE_ENV=production" -s dist/server.js'
