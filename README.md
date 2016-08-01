@@ -39,6 +39,8 @@ To start in dev mode: `grunt serve`
 
 To start in production/minified mode: `grunt serve:dist`
 
+For prod when using start.sh, run the above command first and then cancel out of... something up with build...
+
 ### To run as a daemon using node package forever
 
 Install forever: `npm install forever`
