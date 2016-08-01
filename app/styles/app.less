@@ -163,7 +163,7 @@ td.hashtags {
 .datamap path {
   stroke: #FFFFFF;
   stroke-width: 1px;
-} 
+}
 .datamaps-legend dt, .datamaps-legend dd {
   float: left;
   margin: 0 3px 0 0;
@@ -184,9 +184,9 @@ td.hashtags {
 .datamaps-hoverover {
   display: none;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-} 
+}
 .hoverinfo {
-  padding: 4px; 
+  padding: 4px;
   border-radius: 1px;
   background-color: #FFF;
   box-shadow: 1px 1px 5px #CCC;
@@ -197,6 +197,60 @@ td.hashtags {
   border:1px dotted #CCC;
 }
 
+/* bar chart css */
+.bar {
+  fill: steelblue;
+  shape-rendering: crispEdges;
+}
+
+.bar:hover {
+  fill: orangered;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar-negative {
+  fill: darkorange;
+}
+
+/*
+.x.axis path {
+  display: none;
+}
+*/
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */

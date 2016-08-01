@@ -3,10 +3,10 @@
 angular.module('houstyApp')
 .controller('PlayCtrl', function ($scope, $http, $window, $timeout) {
   var dm;
-  
+
   $scope.hello = 'Hello Play';
   $scope.slider = {index:0,count:0};
-  
+
   // Used by buttons, not currently used
   $scope.isActive = function(id) {
     return id === $scope.selectedId;
@@ -79,7 +79,7 @@ angular.module('houstyApp')
         end: data.length-1,
         value: data.length-1
       };
-      
+
       $scope.updateMap(data[data.length-1]);
     }
   });
@@ -117,6 +117,11 @@ angular.module('houstyApp')
       //dmap.legend();
     });
   }
-  
-  
+
+  // show bar chart of happiest times
+  $http.get('/api/happiestTimes').success(function(data) {
+    timeBarChart(data);
+  });
+
+
 });

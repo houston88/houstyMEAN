@@ -2,7 +2,7 @@
   <div class="jumbotron">
     <h2>Happiest States</h2>
     <p class="lead">Based on 10 minutes of 1% Twitter stream from {{selectedDate | date:'medium'}} GMT</p>
-    
+
     <!--
     <div class="btn-group">
       <button ng-repeat="happiestState in happiestStates"
@@ -33,12 +33,14 @@
                   <tr>
                       <th>#</th>
                       <th>State</th>
+                      <th>Score</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr ng-repeat="state in statesTable | orderBy:'+rank' | limitTo:10">
                       <td>{{state.rank}}</td>
                       <td>{{state.state}}</td>
+                      <td>{{state.score}}</td>
                   </tr>
                   </tbody>
               </table>
@@ -85,6 +87,14 @@
     <small>
       Not filtered by geography. Click and drag a circle, it's kinda fun.
     </small>
+
+    <h2>Historical Happiness over Time</h2>
+    <p class="lead">Based on twitter stream data collected</p>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="happy-bar"></div>
+      </div>
+    </div>
 
   </div>
 </div>
