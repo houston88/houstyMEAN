@@ -2,8 +2,11 @@
 
 function timeBarChart(data) {
 
+    // to support small screens
+    var screenWidth = $('#happy-bar').width();
+
     var margin = {top: 10, right: 10, bottom: 10, left: 35},
-		    width = 960 - margin.left - margin.right,
+		    width = screenWidth - margin.left - margin.right,
 		    height = 500 - margin.top - margin.bottom;
 
     var y0 = Math.max(Math.abs(d3.min(data)), Math.abs(d3.max(data)));
