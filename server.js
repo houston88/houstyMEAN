@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express'),
+    https = require('https'),
     path = require('path'),
     fs = require('fs'),
     mongoose = require('mongoose');
@@ -38,6 +39,20 @@ require('./lib/routes')(app);
 // Start server
 app.listen(config.port, function () {
   console.log('Express server listening on port %d in %s mode', config.port, app.get('env'));
+});
+
+// Let's try https
+var options = {
+    key: fs.readFileSync( '/etc/ssl/private/express-selfsigned.key' ),
+    cert: fs.readFileSync( '/etc/ssl/certs/express-selfsigned.crt' ),
+    requestCert: false,
+    rejectUnauthorized: false
+};
+var sec_port = 443;
+var sec_server = https.createServer( options, app );
+// Start server
+sec_server.listen(sec_port, function () {
+  console.log('Express server listening on port %d in %s mode', sec_port, app.get('env'));
 });
 
 // Expose app
